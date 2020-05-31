@@ -7,15 +7,13 @@ import AppInterface from './app.interface';
 @Controller()
 export class AppController implements AppInterface {
   public constructor(
-    private readonly identificationService: IdentificationService
-  ) {
-
-  }
+    private readonly identificationService: IdentificationService,
+  ) {}
 
   @Post('generate')
   public generateQrCode(
-    @Body() {name, phoneNumber, coordinate}: CreateIdentificationDto
+    @Body() { name, phoneNumber }: CreateIdentificationDto,
   ): Observable<string> {
-    return this.identificationService.generateToURL(name, phoneNumber, coordinate);
+    return this.identificationService.generateToURL(name, phoneNumber);
   }
 }

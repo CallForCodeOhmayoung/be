@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsPhoneNumber } from 'class-validator';
-import CoordinateModel from '../model/coordinate.model';
 
 class CreateIdentificationDto {
   @IsNotEmpty()
@@ -8,10 +7,6 @@ class CreateIdentificationDto {
   @IsPhoneNumber('KR')
   @IsNotEmpty()
   public phoneNumber: string;
-
-  @IsNotEmpty()
-  public coordinate: CoordinateModel;
 }
 
 export default CreateIdentificationDto;
-

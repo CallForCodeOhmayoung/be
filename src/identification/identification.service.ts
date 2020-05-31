@@ -5,7 +5,9 @@ import CoordinateModel from './model/coordinate.model';
 
 @Injectable()
 export class IdentificationService {
-  public generateToURL(name: string, phoneNumber: string, coordinate: CoordinateModel): Observable<string> {
-    return from(qrcode.toDataURL(JSON.stringify({name, phoneNumber, coordinate})));
+  public verifyByPhoneNumber(phoneNumber: string) {}
+
+  public generateToURL(name: string, phoneNumber: string): Observable<string> {
+    return from(qrcode.toDataURL(JSON.stringify({ name, phoneNumber })));
   }
 }

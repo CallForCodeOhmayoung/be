@@ -1,8 +1,11 @@
-import CreateIdentificationDto from "./identification/dto/create-identification.dto";
-import { Observable } from "rxjs";
+import CreateIdentificationDto from './identification/dto/create-identification.dto';
+import { Observable } from 'rxjs';
 
 interface AppInterface {
-  generateQrCode({name, phoneNumber, coordinate}: CreateIdentificationDto): Observable<string>;
+  generateQrCode({
+    name,
+    phoneNumber,
+  }: CreateIdentificationDto): Observable<string>;
 }
 
 export default AppInterface;
