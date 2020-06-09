@@ -48,8 +48,8 @@ export class AuthenticationController extends BaseController
       }),
       concatMap(account => {
         const verifyPassword$ = this.authenticationService.verifyPassword(
-          account.password,
           password,
+          account.password,
         );
         return verifyPassword$.pipe(
           concatMap(verified => {
