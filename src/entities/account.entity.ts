@@ -24,6 +24,9 @@ export class AccountEntity extends Model<AccountEntity> {
   @Column(DataType.CHAR)
   public name: string;
 
+  @Column(DataType.TEXT)
+  public password: string;
+
   @Column(DataType.TINYINT({ length: 1 }))
   public isVerified: number;
 

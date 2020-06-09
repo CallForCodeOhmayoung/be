@@ -20,7 +20,7 @@ export const databaseProviders = [
       sequelize.addModels([AccountEntity, AccessEntity]);
 
       await sequelize.authenticate();
-      // await sequelize.sync({force: true});
+      await sequelize.sync({ force: true });
 
       return sequelize;
     },
