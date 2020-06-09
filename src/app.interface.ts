@@ -1,8 +1,3 @@
-import TaggingDto from '@app/shared/dto/tagging.dto';
-import { Observable } from 'rxjs';
-
-interface AppInterface {
-  tagging({ address, isOut }: TaggingDto): Observable<void>;
-}
+interface AppInterface {}
 
 export default AppInterface;

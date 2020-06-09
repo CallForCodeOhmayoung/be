@@ -4,6 +4,7 @@ import { IdentificationModule } from '@app/identification/identification.module'
 import { AuthenticationModule } from '@app/authentication/authentication.module';
 import { AppModule } from '@app/app.module';
 import { MeModule } from '@app/me/me.module';
+import { ManagementModule } from '@app/management/management.module';
 
 const swaggerBootstrap = (app: INestApplication) => {
   const customCss = () => `
@@ -1696,7 +1697,13 @@ const swaggerBootstrap = (app: INestApplication) => {
     .build();
 
   const document = SwaggerModule.createDocument(app, options, {
-    include: [AuthenticationModule, IdentificationModule, AppModule, MeModule],
+    include: [
+      AuthenticationModule,
+      IdentificationModule,
+      ManagementModule,
+      AppModule,
+      MeModule,
+    ],
   });
 
   SwaggerModule.setup('', app, document, {

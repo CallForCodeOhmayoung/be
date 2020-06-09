@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MorganModule } from 'nest-morgan';
 import authenticationProvider from '@app/authentication/authentication.provider';
 import { MeService } from '@app/me/me.service';
+import { ManagementModule } from './management/management.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { MeService } from '@app/me/me.service';
     AuthenticationModule,
     MeModule,
     ConfigModule,
+    ManagementModule,
   ],
   controllers: [AppController],
   providers: [
