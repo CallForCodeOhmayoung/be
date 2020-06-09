@@ -1696,12 +1696,7 @@ const swaggerBootstrap = (app: INestApplication) => {
     .build();
 
   const document = SwaggerModule.createDocument(app, options, {
-    include: [
-      AuthenticationModule,
-      IdentificationModule,
-      MeModule,
-      AppModule
-    ],
+    include: [AuthenticationModule, IdentificationModule, AppModule, MeModule],
   });
 
   SwaggerModule.setup('', app, document, {

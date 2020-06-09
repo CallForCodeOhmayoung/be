@@ -7,6 +7,8 @@ import { MeModule } from './me/me.module';
 import { databaseProviders } from '@app/shared/provider/database.provider';
 import { ConfigModule } from '@nestjs/config';
 import { MorganModule } from 'nest-morgan';
+import authenticationProvider from '@app/authentication/authentication.provider';
+import { MeService } from '@app/me/me.service';
 
 @Module({
   imports: [
@@ -17,6 +19,11 @@ import { MorganModule } from 'nest-morgan';
     ConfigModule,
   ],
   controllers: [AppController],
-  providers: [IdentificationService, ...databaseProviders],
+  providers: [
+    IdentificationService,
+    ...databaseProviders,
+    ...authenticationProvider,
+    MeService,
+  ],
 })
 export class AppModule {}

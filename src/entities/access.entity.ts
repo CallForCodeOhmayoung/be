@@ -24,6 +24,9 @@ export class AccessEntity extends Model<AccessEntity> {
   @Column(DataType.TINYINT({ length: 1 }))
   public isOut: number;
 
+  @Column(DataType.CHAR)
+  public address: string;
+
   @CreatedAt
   @AllowNull(false)
   @Column(DataType.DATE)
