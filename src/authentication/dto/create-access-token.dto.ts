@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumberString, IsPhoneNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumberString, IsPhoneNumber } from 'class-validator';
 
-class SignUpDto {
+class CreateAccessTokenDto {
   @ApiProperty({
     description: '핸드폰 번호',
     required: true,
@@ -19,4 +19,4 @@ class SignUpDto {
   public password: string;
 }
 
-export default SignUpDto;
+export default CreateAccessTokenDto;

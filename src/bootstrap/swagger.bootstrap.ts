@@ -1687,6 +1687,7 @@ const swaggerBootstrap = (app: INestApplication) => {
 
   const options = new DocumentBuilder()
     .setTitle('QR 코드 기반 혼잡도 REST API')
+    .addServer('https://for-ibm.hax0r.info/')
     .addServer('http://localhost:3000/')
     .addBearerAuth({
       type: 'http',

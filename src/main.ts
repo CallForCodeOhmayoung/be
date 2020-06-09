@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import swaggerBootstrap from './bootstrap/swagger.bootstrap';
 import * as helmet from 'helmet';
 import * as dotenv from 'dotenv';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   dotenv.config();
@@ -11,6 +12,7 @@ async function bootstrap() {
 
   swaggerBootstrap(app);
   app.use(helmet());
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(3000);
 }
