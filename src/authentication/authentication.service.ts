@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import AccessTokenModel from '@app/authentication/model/access-token.model';
 import AuthenticationServiceInterface from '@app/authentication/interface/authentication.service.interface';
 import * as bcrypt from 'bcryptjs';
+import { IdentificationService } from '@app/identification/identification.service';
 
 @Injectable()
 export class AuthenticationService implements AuthenticationServiceInterface {
@@ -16,6 +17,7 @@ export class AuthenticationService implements AuthenticationServiceInterface {
     @Inject('ACCOUNT_REPOSITORY')
     private readonly accountRepository: Repository<AccountEntity>,
     private readonly configService: ConfigService,
+    private readonly identificationService: IdentificationService
   ) {}
 
   public verifyPassword(
@@ -56,12 +58,18 @@ export class AuthenticationService implements AuthenticationServiceInterface {
     phoneNumber: string,
     password: string,
   ): Observable<AccessTokenModel> {
-    return from(
-      this.accountRepository.create({
-        phoneNumber,
-        password: this.encryptedPassword(password),
-      }),
-    ).pipe(concatMap(account => this.createAccessToken(account)));
+    const qr$ = this.identificationService.generateToURL(phoneNumber);
+    return qr$.pipe(
+      concatMap(qrCode => {
+        return from(
+          this.accountRepository.create({
+            phoneNumber,
+            password: this.encryptedPassword(password),
+            qrCode
+          }),
+        ).pipe(concatMap(account => this.createAccessToken(account)));
+      })
+    )
   }
 
   public getByPhoneNumber(phoneNumber: string): Observable<AccountEntity> {

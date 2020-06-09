@@ -1,0 +1,18 @@
+import { ApiProperty } from '@nestjs/swagger';
+
+abstract class ProfileModel {
+  @ApiProperty({
+    description: '핸드폰 번호',
+    required: true,
+  })
+  public phoneNumber: string;
+
+  @ApiProperty({
+    description: 'QR 코드',
+    required: true,
+    example: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAYAAABRRIOnAAAAAklEQVR4AewaftIAAAOcSURBVO3BQa5bRwADwe6B7n9lxossuBrgQdKP7bDK/MLMvw4z5TBTDjPlMFMOM+UwUw4z5TBTDjPlMFMOM+UwUw4z5TBTDjPlxZtUflISmkpLwo1KS8KNSktCU2lJaCo/KQnvOMyUw0w5zJQXH5aET1K5ScITSWgqLQlPJOGJJHySyicdZsphphxmyosvU3kiCU+oPJGEloSmcqNyk4QnVJ5IwjcdZsphphxmyos/XBKaSkvCE0l4QuVvcpgph5lymCkv/mdUWhJuVP5PDjPlMFMOM+XFlyXhm1RuVG5UbpLwTUn4nRxmymGmHGbKiw9T+S8loam0JDSVloSm0pLQVFoSblR+Z4eZcpgph5lifuEvovJEEp5QaUn4mxxmymGmHGbKizeptCQ0lZaEJ1RuknCThKbSVG6ScKPSknCj0pJwo9KS0FRaEt5xmCmHmXKYKS/elISm0pJwo9KS0JLQVJrKjco3JeFG5R1JaCrfdJgph5lymCkvvkylJeEJlSeS0FRaEm5UnlBpSWhJuFF5IglN5ZMOM+UwUw4z5cWbVJ5QaUm4SUJTuVF5QuUdSWgqLQlNpSWhqbQk/KTDTDnMlMNMMb/wRSqflISm0pLQVD4pCU+otCTcqLQkNJWbJLzjMFMOM+UwU1785pLQVFoSmkpLwjtUmkpLwhMqLQktCU2lJaGpfNJhphxmymGmvHiTyk0SmkpLQlNpKp+k8kQSmkpT+SSVG5VvOsyUw0w5zJQXb0rCE0m4ScKNyk0SmspNEprKE0m4UblRuUlCU/mmw0w5zJTDTHnxJpVPSkJTuVFpSbhJwk0SmsqNyn8pCZ90mCmHmXKYKeYX/mAq35SEG5WWhCdUPikJ7zjMlMNMOcyUF29S+UlJeCIJNyo3Ki0JT6i0JNwk4QmVTzrMlMNMOcyUFx+WhE9SuUlCU3lHEprKO5LwhEpLwk0SPukwUw4z5TBTXnyZyhNJ+CaVG5UblRuVb1K5ScI7DjPlMFMOM+XFXyYJTaUloancJOFG5SYJT6g0lZskfNJhphxmymGmvPjDqbQktCQ0lSdUvknlJglNpam0JLzjMFMOM+UwU158WRK+KQlPJKGptCTcqLxDpSWhqdwk4ZsOM+UwUw4z5cWHqfwklU9SuUlCU2lJaCotCU3lHSotCe84zJTDTDnMFPMLM/86zJTDTDnMlMNMOcyUw0w5zJTDTDnMlMNMOcyUw0w5zJTDTDnMlH8Aq5uAT5XoUAAAAAAASUVORK5CYII='
+  })
+  public qrCode: string;
+}
+
+export default ProfileModel;
