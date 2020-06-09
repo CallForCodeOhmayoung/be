@@ -5,6 +5,7 @@ import { from, Observable } from 'rxjs';
 import ProfileModel from '@app/me/model/profile.model';
 import MeServiceInterface from '@app/me/interface/me.service.interface';
 import { AccessEntity } from '@app/entities/access.entity';
+import { concatMap } from 'rxjs/operators';
 
 @Injectable()
 export class MeService implements MeServiceInterface {
@@ -26,7 +27,21 @@ export class MeService implements MeServiceInterface {
     );
   }
 
-  public tagging(address: string, isOut: number) {
-    return from(this.accessRepository.create({ address, isOut }));
+  public tagging(address: string, isOut: number, phoneNumber: string) {
+    return from(
+      this.accountRepository.findOne({
+        where: { phoneNumber: phoneNumber },
+      }),
+    ).pipe(
+      concatMap(account => {
+        return from(
+          this.accessRepository.create({
+            address,
+            isOut,
+            accountId: account.id,
+          }),
+        );
+      }),
+    );
   }
 }
