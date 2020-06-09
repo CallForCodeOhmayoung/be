@@ -1,6 +1,8 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { IdentificationModule } from '@app/identification/identification.module';
+import { AuthenticationModule } from '@app/authentication/authentication.module';
+import { AppModule } from '@app/app.module';
 
 const swaggerBootstrap = (app: INestApplication) => {
   const customCss = () => `
@@ -1692,10 +1694,10 @@ const swaggerBootstrap = (app: INestApplication) => {
     .build();
 
   const document = SwaggerModule.createDocument(app, options, {
-    include: [IdentificationModule],
+    include: [AuthenticationModule, IdentificationModule, AppModule],
   });
 
-  SwaggerModule.setup('docs', app, document, {
+  SwaggerModule.setup('', app, document, {
     customSiteTitle: 'QR 코드 기반 혼잡도 REST API',
     customCss: customCss(),
   });
