@@ -61,7 +61,7 @@ export class ManagementService {
         where isOut = 0 and id IN (
         SELECT MAX(id)
           FROM AccessEntities
-          GROUP BY accountId
+          GROUP BY address, accountId
       )
          group by address HAVING distance < 5
         `,
