@@ -25,6 +25,7 @@ import { AuthGuard } from '@app/shared/guards/auth.guard';
 import CongestionDto from '@app/management/dto/congestion.dto';
 import { ManagementService } from '@app/management/management.service';
 import CongestionModel from '@app/shared/model/congestion.model';
+import ExploreDto from '@app/management/dto/explore.dto';
 
 @ApiTags('management')
 @UseGuards(AuthGuard)
@@ -66,5 +67,17 @@ export class ManagementController extends BaseController {
     @Query() { address }: CongestionDto,
   ): Observable<CongestionModel> {
     return this.managementService.congestionByAddress(address);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    type: CongestionModel,
+  })
+  @ApiOperation({ summary: `햔재 위치의 위경도 기반으로 혼잡도를 출력한다.` })
+  @CommonResponseReceiptDecorator()
+  @Get('explore')
+  public explore(@Query() { latitude, longitude }: ExploreDto) {
+    return this.managementService.explore(latitude, longitude);
   }
 }

@@ -47,4 +47,22 @@ export class ManagementService {
       }),
     );
   }
+
+  public explore(latitude: number, longitude: number) {
+    return from(
+      this.accessRepository.sequelize.query(
+        `
+        SELECT *, 
+        ( 3959 * acos( cos( radians(" ${latitude} ") ) * cos( radians( latitude ) ) 
+        * cos( radians( longitude ) - radians(" ${longitude} ") ) 
+        + sin( radians(" ${latitude} ") ) * sin( radians( latitude ) ) ) ) AS distance
+        FROM callforcode.AccessEntities HAVING distance < 5
+        `,
+        {
+          raw: true,
+          type: Sequelize.QueryTypes.SELECT,
+        },
+      ),
+    );
+  }
 }
