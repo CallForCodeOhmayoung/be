@@ -27,6 +27,12 @@ export class AccessEntity extends Model<AccessEntity> {
   @Column(DataType.CHAR)
   public address: string;
 
+  @Column(DataType.DECIMAL(10, 8))
+  public latitude: number;
+
+  @Column(DataType.DECIMAL(11, 8))
+  public longitude: number;
+
   @CreatedAt
   @AllowNull(false)
   @Column(DataType.DATE)

@@ -1,6 +1,6 @@
 class CoordinateModel {
-  public latitude: string;
-  public longitude: string;
+  public latitude: number;
+  public longitude: number;
 }
 
 export default CoordinateModel;

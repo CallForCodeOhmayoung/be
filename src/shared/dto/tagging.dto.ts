@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsLatitude, IsLongitude, IsNotEmpty } from 'class-validator';
 
 abstract class TaggingDto {
   @ApiProperty({
@@ -16,6 +16,22 @@ abstract class TaggingDto {
   })
   @IsNotEmpty()
   public isOut: number;
+
+  @ApiProperty({
+    description: '위도',
+    required: true,
+  })
+  @IsLatitude()
+  @IsNotEmpty()
+  public latitude: number;
+
+  @ApiProperty({
+    description: '경도',
+    required: true,
+  })
+  @IsLongitude()
+  @IsNotEmpty()
+  public longitude: number;
 }
 
 export default TaggingDto;

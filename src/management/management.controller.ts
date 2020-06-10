@@ -46,12 +46,12 @@ export class ManagementController extends BaseController {
   @CommonResponseReceiptDecorator()
   @Post('tagging')
   public tagging(
-    @Body() { address, isOut }: TaggingDto,
+    @Body() { address, isOut, latitude, longitude }: TaggingDto,
     @AccountPhoneNumber() phoneNumber: string,
   ): Observable<void> {
-    return from(this.meService.tagging(address, isOut, phoneNumber)).pipe(
-      map(() => {}),
-    );
+    return from(
+      this.meService.tagging(address, isOut, phoneNumber, latitude, longitude),
+    ).pipe(map(() => {}));
   }
 
   @HttpCode(HttpStatus.OK)

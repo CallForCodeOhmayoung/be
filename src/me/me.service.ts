@@ -27,7 +27,13 @@ export class MeService implements MeServiceInterface {
     );
   }
 
-  public tagging(address: string, isOut: number, phoneNumber: string) {
+  public tagging(
+    address: string,
+    isOut: number,
+    phoneNumber: string,
+    latitude: number,
+    longitude: number,
+  ): Observable<AccessEntity> {
     return from(
       this.accountRepository.findOne({
         where: { phoneNumber: phoneNumber },
@@ -39,6 +45,8 @@ export class MeService implements MeServiceInterface {
             address,
             isOut,
             accountId: account.id,
+            latitude,
+            longitude,
           }),
         );
       }),
