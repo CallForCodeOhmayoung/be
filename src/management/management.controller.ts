@@ -26,6 +26,7 @@ import CongestionDto from '@app/management/dto/congestion.dto';
 import { ManagementService } from '@app/management/management.service';
 import CongestionModel from '@app/shared/model/congestion.model';
 import ExploreDto from '@app/management/dto/explore.dto';
+import ExploreModel from '@app/management/model/explore.model';
 
 @ApiTags('management')
 @UseGuards(AuthGuard)
@@ -72,7 +73,7 @@ export class ManagementController extends BaseController {
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.OK,
-    type: CongestionModel,
+    type: ExploreModel,
   })
   @ApiOperation({ summary: `햔재 위치의 위경도 기반으로 혼잡도를 출력한다.` })
   @CommonResponseReceiptDecorator()
