@@ -4,11 +4,28 @@ import swaggerBootstrap from './bootstrap/swagger.bootstrap';
 import * as helmet from 'helmet';
 import * as dotenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
+import * as cors from 'cors';
 
 async function bootstrap() {
   dotenv.config();
 
   const app = await NestFactory.create(AppModule);
+  app.use(
+    cors((req: any, callback: any) => {
+      const whitelist = [
+        'http://localhost',
+        'http://localhost:1234',
+        'http://localhost:5500',
+      ];
+      const corsOptions = {
+        origin: whitelist.includes(req.headers.origin as string)
+          ? req.headers.origin
+          : false,
+        credentials: !!whitelist.includes(req.headers.origin as string),
+      };
+      callback(null, corsOptions);
+    }),
+  );
 
   swaggerBootstrap(app);
   app.use(helmet());

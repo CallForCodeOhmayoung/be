@@ -35,7 +35,9 @@ export class ManagementService {
             total++;
           }
         }
-        const quotesPercent = (total / 500) * 100;
+
+        const maximumQuotes = 500;
+        const quotesPercent = (total / maximumQuotes) * 100;
 
         return {
           total: total,
