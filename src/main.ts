@@ -18,6 +18,7 @@ async function bootstrap() {
         'http://localhost:1234',
         'http://localhost:5500',
         'http://127.0.0.1:5500',
+        'https://map.hax0r.info',
       ];
       const corsOptions = {
         origin: whitelist.includes(req.headers.origin as string)
