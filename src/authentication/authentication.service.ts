@@ -17,7 +17,7 @@ export class AuthenticationService implements AuthenticationServiceInterface {
     @Inject('ACCOUNT_REPOSITORY')
     private readonly accountRepository: Repository<AccountEntity>,
     private readonly configService: ConfigService,
-    private readonly identificationService: IdentificationService
+    private readonly identificationService: IdentificationService,
   ) {}
 
   public verifyPassword(
@@ -42,34 +42,37 @@ export class AuthenticationService implements AuthenticationServiceInterface {
         .format('x'),
     );
     const { phoneNumber } = account;
+
     const signToken = jwt.sign(
       { phoneNumber },
       this.configService.get<string>('AUTHENTICATION_PRIVATE_KEY'),
       { expiresIn },
     );
 
-    return of({
-      token: signToken,
-      expiredAt,
-    });
+    return this.identificationService
+      .generateToURL(phoneNumber, signToken)
+      .pipe(
+        concatMap(qr => from(account.update({ qr }))),
+        map(() => {
+          return {
+            token: signToken,
+            expiredAt,
+          };
+        }),
+      );
   }
 
   public signUp(
     phoneNumber: string,
     password: string,
   ): Observable<AccessTokenModel> {
-    const qr$ = this.identificationService.generateToURL(phoneNumber);
-    return qr$.pipe(
-      concatMap(qrCode => {
-        return from(
-          this.accountRepository.create({
-            phoneNumber,
-            password: this.encryptedPassword(password),
-            qrCode
-          }),
-        ).pipe(concatMap(account => this.createAccessToken(account)));
-      })
-    )
+    const account$ = from(
+      this.accountRepository.create({
+        phoneNumber,
+        password: this.encryptedPassword(password),
+      }),
+    );
+    return account$.pipe(concatMap(account => this.createAccessToken(account)));
   }
 
   public getByPhoneNumber(phoneNumber: string): Observable<AccountEntity> {

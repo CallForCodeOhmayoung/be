@@ -27,10 +27,12 @@ import { ManagementService } from '@app/management/management.service';
 import CongestionModel from '@app/shared/model/congestion.model';
 import ExploreDto from '@app/management/dto/explore.dto';
 import ExploreModel from '@app/management/model/explore.model';
+import ManagementControllerInterface from '@app/management/interface/management.controller.interface';
 
 @ApiTags('management')
 @Controller('managements')
-export class ManagementController extends BaseController {
+export class ManagementController extends BaseController
+  implements ManagementControllerInterface {
   public constructor(
     private readonly meService: MeService,
     private readonly managementService: ManagementService,
@@ -78,7 +80,9 @@ export class ManagementController extends BaseController {
   @ApiOperation({ summary: `햔재 위치의 위경도 기반으로 혼잡도를 출력한다.` })
   @CommonResponseReceiptDecorator()
   @Get('explore')
-  public explore(@Query() { latitude, longitude }: ExploreDto) {
+  public explore(
+    @Query() { latitude, longitude }: ExploreDto,
+  ): Observable<ExploreModel[]> {
     return this.managementService.explore(latitude, longitude);
   }
 }

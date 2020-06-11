@@ -6,13 +6,15 @@ import CongestionModel from '@app/shared/model/congestion.model';
 import { map } from 'rxjs/operators';
 import * as Sequelize from 'sequelize';
 import ExploreModel from '@app/management/model/explore.model';
+import ManagementServiceInterface from '@app/management/interface/management.service.interface';
 
 @Injectable()
-export class ManagementService {
+export class ManagementService implements ManagementServiceInterface {
   public constructor(
     @Inject('ACCESS_REPOSITORY')
     private readonly accessRepository: Repository<AccessEntity>,
   ) {}
+
   public congestionByAddress(address: string): Observable<CongestionModel> {
     return from(
       this.accessRepository.sequelize.query(
@@ -49,7 +51,10 @@ export class ManagementService {
     );
   }
 
-  public explore(latitude: number, longitude: number) {
+  public explore(
+    latitude: number,
+    longitude: number,
+  ): Observable<ExploreModel[]> {
     return from(
       this.accessRepository.sequelize.query(
         `
