@@ -17,10 +17,10 @@ export class ManagementService {
     return from(
       this.accessRepository.sequelize.query(
         `
-      SELECT * FROM callforcode.AccessEntities WHERE address = "${address}" and id IN (
+      SELECT * FROM callforcode.AccessEntities WHERE address = "${address}" and isOut = 0 and id IN (
         SELECT MAX(id)
           FROM AccessEntities
-          GROUP BY accountId
+          GROUP BY address, accountId
       );
       `,
         {
