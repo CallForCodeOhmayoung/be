@@ -49,17 +49,15 @@ export class AuthenticationService implements AuthenticationServiceInterface {
       { expiresIn },
     );
 
-    return this.identificationService
-      .generateToURL(phoneNumber, signToken)
-      .pipe(
-        concatMap(qr => from(account.update({ qr }))),
-        map(() => {
-          return {
-            token: signToken,
-            expiredAt,
-          };
-        }),
-      );
+    const token = {
+      token: signToken,
+      expiredAt,
+    };
+
+    return this.identificationService.generateToURL(phoneNumber, token).pipe(
+      concatMap(qr => from(account.update({ qr }))),
+      map(() => token),
+    );
   }
 
   public signUp(
