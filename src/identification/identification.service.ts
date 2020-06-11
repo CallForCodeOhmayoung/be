@@ -9,6 +9,6 @@ export class IdentificationService {
     phoneNumber: string,
     token: AccessTokenModel,
   ): Observable<string> {
-    return from(qrcode.toDataURL(JSON.stringify({ phoneNumber, token })));
+    return from(qrcode.toDataURL(JSON.stringify({ phoneNumber, ...token })));
   }
 }
