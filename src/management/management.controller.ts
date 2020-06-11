@@ -29,8 +29,6 @@ import ExploreDto from '@app/management/dto/explore.dto';
 import ExploreModel from '@app/management/model/explore.model';
 
 @ApiTags('management')
-@UseGuards(AuthGuard)
-@ApiBearerAuth()
 @Controller('managements')
 export class ManagementController extends BaseController {
   public constructor(
@@ -45,6 +43,8 @@ export class ManagementController extends BaseController {
     status: HttpStatus.OK,
   })
   @ApiOperation({ summary: `건물에 태깅을 한다.` })
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @CommonResponseReceiptDecorator()
   @Post('tagging')
   public tagging(
