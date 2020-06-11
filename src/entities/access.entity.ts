@@ -9,7 +9,9 @@ import {
   AllowNull,
   UpdatedAt,
   DeletedAt,
+  ForeignKey,
 } from 'sequelize-typescript';
+import { AccountEntity } from '@app/entities/account.entity';
 
 @Table
 export class AccessEntity extends Model<AccessEntity> {
@@ -18,6 +20,7 @@ export class AccessEntity extends Model<AccessEntity> {
   @Column(DataType.BIGINT)
   public id: number;
 
+  @ForeignKey(() => AccountEntity)
   @Column(DataType.BIGINT)
   public accountId: number;
 

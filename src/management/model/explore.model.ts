@@ -15,16 +15,16 @@ abstract class ExploreModel {
   public distance: number;
 
   @ApiProperty({
-    description: '경도',
-    required: true,
-  })
-  public latitude: number;
-
-  @ApiProperty({
     description: '위도',
     required: true,
   })
-  public longitude: number;
+  public latitude: number | string;
+
+  @ApiProperty({
+    description: '경도',
+    required: true,
+  })
+  public longitude: number | string;
 
   @ApiProperty({
     description: '총 수',

@@ -27,6 +27,30 @@ export class MeService implements MeServiceInterface {
     );
   }
 
+  public fetchHistories(
+    phoneNumber: string,
+  ): Observable<{ rows: AccessEntity[]; count: number }> {
+    return from(
+      this.accountRepository.findOne({ where: { phoneNumber } }),
+    ).pipe(
+      concatMap(({ id }) => {
+        return from(
+          this.accessRepository.findAndCountAll({
+            attributes: [
+              'address',
+              'isOut',
+              'latitude',
+              'longitude',
+              'createdAt',
+            ],
+            where: { accountId: id },
+            order: [['id', 'desc']],
+          }),
+        );
+      }),
+    );
+  }
+
   public tagging(
     address: string,
     isOut: number,

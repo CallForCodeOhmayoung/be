@@ -9,7 +9,9 @@ import {
   AllowNull,
   UpdatedAt,
   DeletedAt,
+  HasMany,
 } from 'sequelize-typescript';
+import { AccessEntity } from '@app/entities/access.entity';
 
 @Table
 export class AccountEntity extends Model<AccountEntity> {
@@ -47,4 +49,7 @@ export class AccountEntity extends Model<AccountEntity> {
   @AllowNull(true)
   @Column(DataType.DATE)
   public deleteAt: Date;
+
+  @HasMany(() => AccessEntity)
+  public accesses: AccessEntity[];
 }
