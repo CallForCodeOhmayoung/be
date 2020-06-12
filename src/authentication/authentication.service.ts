@@ -55,7 +55,7 @@ export class AuthenticationService implements AuthenticationServiceInterface {
     };
 
     return this.identificationService.generateToURL(phoneNumber, token).pipe(
-      concatMap(qr => from(account.update({ qr }))),
+      concatMap(qrCode => from(account.update({ qrCode }))),
       map(() => token),
     );
   }
